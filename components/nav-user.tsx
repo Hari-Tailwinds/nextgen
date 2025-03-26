@@ -7,7 +7,9 @@ import {
   LifeBuoy,
   LogOut,
   Send,
+  SunMoon,
 } from "lucide-react";
+import { useTheme } from "next-themes";
 import { useState } from "react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -27,6 +29,7 @@ import {
 } from "@/components/ui/sidebar";
 import Drawercustom from "./drawerright/drawercustom";
 import { HelpDrawer } from "./drawerright/helper";
+import { Badge } from "./ui/badge";
 
 export function NavUser({
   user,
@@ -38,7 +41,7 @@ export function NavUser({
   };
 }) {
   const [show, setShow] = useState<boolean>(false);
-
+  const { setTheme, theme } = useTheme();
   return (
     <>
       <SidebarMenu>
@@ -93,14 +96,27 @@ export function NavUser({
               sideOffset={4}
             >
               <DropdownMenuLabel className="p-0 font-normal">
-                <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                  <Avatar className="h-8 w-8 rounded-lg">
-                    <AvatarImage src={user.avatar} alt={user.name} />
-                    <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                  </Avatar>
-                  <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold">{user.name}</span>
-                    <span className="truncate text-xs">{user.email}</span>
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                    <Avatar className="h-8 w-8 rounded-lg">
+                      <AvatarImage src={user.avatar} alt={user.name} />
+                      <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                    </Avatar>
+                    <div className="grid flex-1 text-left text-sm leading-tight">
+                      <span className="truncate font-semibold">
+                        {user.name}
+                      </span>
+                      <span className="truncate text-xs">{user.email}</span>
+                    </div>
+                  </div>
+                  <div className="pr-3">
+                    <div className="relative w-10 h-10 flex items-center justify-center">
+                      <Bell size={20} strokeWidth={0.5} />
+
+                      <Badge className="absolute top-1 right-1 px-0 py-1 text-[10px] rounded-full w-[14px] h-[15px]">
+                        1
+                      </Badge>
+                    </div>
                   </div>
                 </div>
               </DropdownMenuLabel>
@@ -117,14 +133,18 @@ export function NavUser({
                   <BadgeCheck />
                   Setting
                 </DropdownMenuItem>
+                <DropdownMenuItem
+                  onClick={() =>
+                    theme === "light" ? setTheme("dark") : setTheme("light")
+                  }
+                >
+                  <SunMoon />
+                  {theme === "light" ? "Dark Mode" : "Light Mode"}
+                </DropdownMenuItem>
                 {/* <DropdownMenuItem>
-                <CreditCard />
-                Dark
-              </DropdownMenuItem> */}
-                <DropdownMenuItem>
                   <Bell />
                   Notifications
-                </DropdownMenuItem>
+                </DropdownMenuItem> */}
                 <DropdownMenuItem>
                   <LogOut />
                   Log out

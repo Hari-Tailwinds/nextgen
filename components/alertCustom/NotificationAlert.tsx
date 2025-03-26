@@ -26,7 +26,6 @@ export default function CustomAlert() {
   const { type, title, description, isVisible } = useSelector(
     (state: RootState) => state.notification
   );
-  console.log("is", isVisible);
   useEffect(() => {
     if (isVisible) {
       const timer = setTimeout(() => {

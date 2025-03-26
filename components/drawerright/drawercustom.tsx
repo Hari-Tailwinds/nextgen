@@ -5,6 +5,7 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
+import { SquareArrowUpRight } from "lucide-react";
 import React from "react";
 
 interface DrawerProps {
@@ -22,10 +23,15 @@ const Drawercustom: React.FC<DrawerProps> = ({
 }) => {
   return (
     <Drawer direction={"right"} open={open} onOpenChange={onClose}>
-      <DrawerContent className="p-2">
+      <DrawerContent className="p-2 w-[60%]">
         <DrawerHeader className="p-2">
-          <DrawerTitle className="p-2">
-            {title ? title : "Add Title"}
+          <DrawerTitle className="">
+            <div className="flex justify-between">
+              <div>{title ? title : "Add Title"}</div>
+              <div>
+                <SquareArrowUpRight onClick={onClose} />
+              </div>
+            </div>
           </DrawerTitle>
         </DrawerHeader>
         <div className="p-2">{children}</div>

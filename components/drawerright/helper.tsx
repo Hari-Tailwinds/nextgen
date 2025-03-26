@@ -39,12 +39,10 @@ function HelpDrawer() {
         >
           {data.map((item, index) => {
             return (
-              <>
-                <AccordionItem value={`item-${index + 1}`} key={index}>
-                  <AccordionTrigger>{item.head}</AccordionTrigger>
-                  <AccordionContent>{item.body}</AccordionContent>
-                </AccordionItem>
-              </>
+              <AccordionItem value={`item-${index + 1}`} key={index}>
+                <AccordionTrigger>{item.head}</AccordionTrigger>
+                <AccordionContent>{item.body}</AccordionContent>
+              </AccordionItem>
             );
           })}
         </AccordiionCustom>
